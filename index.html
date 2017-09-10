@@ -9,40 +9,41 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nova+Mono" >
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
       <div id="calc-case">
         <p>JavaScript Calculator</p>
         <div id="calc-screen">
-          <h1 id="calc-screen-current"></h1>
-          <h2 id="calc-screen-concat"></h2>
+          <h1 id="calc-screen-current"> {{current}} </h1>
+          <h2 id="calc-screen-concat"> {{concat}} </h2>
         </div>
         <div id="calc-buttons">
-          <button class="red" id="AC">AC</button>
-          <button class="red" id="CE">CE</button>
-          <button id="divide">&divide;</button>
-          <button id="times">&times;</button>
+          <button class="red" id="AC" @click="clearAll">AC</button>
+          <button class="red" id="CE" @click="clearEntry">CE</button>
+          <button id="divide" @click="typeOperator('/')">&divide;</button>
+          <button id="times" @click="typeOperator('*')">&times;</button>
 
-          <button id="seven">7</button>
-          <button id="eight">8</button>
-          <button id="nine">9</button>
-          <button id="minus">&minus;</button>
+          <button @click="typeNumber(7)">7</button>
+          <button @click="typeNumber(8)">8</button>
+          <button @click="typeNumber(9)">9</button>
+          <button id="minus" @click="typeOperator('-')">&minus;</button>
 
-          <button id="four">4</button>
-          <button id="five">5</button>
-          <button id="six">6</button>
-          <button id="plus">&plus;</button>
+          <button @click="typeNumber(4)">4</button>
+          <button @click="typeNumber(5)">5</button>
+          <button @click="typeNumber(6)">6</button>
+          <button id="plus" @click="typeOperator('+')">&plus;</button>
 
-          <button id="one">1</button>
-          <button id="two">2</button>
-          <button id="three">3</button>
+          <button @click="typeNumber(1)">1</button>
+          <button @click="typeNumber(2)">2</button>
+          <button @click="typeNumber(3)">3</button>
           <button id="equal">=</button>
 
-          <button id="zero">0</button>
+          <button id="zero" @click="typeNumber(0)">0</button>
           <button id="point">.</button>
         </div>
       </div>
     </div>
 
   <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+  <script src="app.js"></script>
   </body>
 </html>
