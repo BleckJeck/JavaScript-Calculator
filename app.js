@@ -6,6 +6,7 @@ const app = new Vue({
     current: '0',
     concat: '0',
     total: 0,
+    lastNum: null,
     ceAllow: true,
     pointAllow: true,
     printTotal: false,
@@ -22,10 +23,17 @@ const app = new Vue({
       var len = this.current.length;
       var entryCleared = this.concat.substring(0, this.concat.length-len);
       if (this.ceAllow && !this.printTotal) {
-        this.concat = entryCleared;
-        this.current = '0';
-        this.ceAllow = false;
-        this.pointAllow = true;
+        if (this.current == '*' || this.current == '/' || this.current == '+' || this.current == '-') {
+          this.concat = entryCleared;
+          this.current = this.lastNum;
+          this.ceAllow = false;
+          this.pointAllow = true;
+        } else {
+          this.concat = entryCleared;
+          this.current = '0';
+          this.ceAllow = false;
+          this.pointAllow = true;
+        }
       }
     },
     typeNumber: function(n) {
@@ -87,6 +95,7 @@ const app = new Vue({
         this.pointAllow = true;
       } else {
         if (this.concat.substr(-1) != '*' && this.concat.substr(-1) != '/' && this.concat.substr(-1) != '+' && this.concat.substr(-1) != '-') {
+          this.lastNum = this.current;
           this.current = operator;
           this.concat += operator;
           this.ceAllow = true;
@@ -94,12 +103,13 @@ const app = new Vue({
         }
       }
     },
-    calculate: function() { //do not run if last digit not a number
-      if (!this.printTotal) {
+    calculate: function() {
+      if (!this.printTotal && this.concat.substr(-1) != '*' && this.concat.substr(-1) != '/' && this.concat.substr(-1) != '+' && this.concat.substr(-1) != '-') {
         this.total = eval(this.concat);
         this.current = (Math.round(this.total * 1000)/1000).toString();
         this.concat += '=' + (Math.round(this.total * 1000)/1000).toString();
         this.printTotal = true;
+        this.lastNum = this.total;
       }
     }
   }
