@@ -17,20 +17,20 @@
           <h3 id="calc-screen-concat"> {{concat}} </h3>
         </div>
         <div id="calc-buttons">
-          <button class="red" id="AC" @click="clearAll">AC</button>
-          <button class="red" id="CE" @click="clearEntry">CE</button>
-          <button id="divide" @click="typeOperator('/')">&divide;</button>
-          <button id="times" @click="typeOperator('*')">&times;</button>
+          <button class="red" @click="clearAll">AC</button>
+          <button class="red" @click="clearEntry">CE</button>
+          <button @click="typeOperator('/')">&divide;</button>
+          <button @click="typeOperator('*')">&times;</button>
 
           <button @click="typeNumber(7)">7</button>
           <button @click="typeNumber(8)">8</button>
           <button @click="typeNumber(9)">9</button>
-          <button id="minus" @click="typeOperator('-')">&minus;</button>
+          <button @click="typeOperator('-')">&minus;</button>
 
           <button @click="typeNumber(4)">4</button>
           <button @click="typeNumber(5)">5</button>
           <button @click="typeNumber(6)">6</button>
-          <button id="plus" @click="typeOperator('+')">&plus;</button>
+          <button @click="typeOperator('+')">&plus;</button>
 
           <button @click="typeNumber(1)">1</button>
           <button @click="typeNumber(2)">2</button>
@@ -38,7 +38,7 @@
           <button id="equal" @click="calculate">=</button>
 
           <button id="zero" @click="typeNumber(0)">0</button>
-          <button id="point" @click="typePoint">.</button>
+          <button @click="typePoint">.</button>
         </div>
       </div>
     </div>
