@@ -30,55 +30,77 @@ const app = new Vue({
     },
     typeNumber: function(n) {
       var num = n.toString();
-      if (this.current == '*' || this.current == '/' || this.current == '+' || this.current == '-') {
-        this.current = num;
-        this.concat += num;
-        this.ceAllow = true;
-      } else if (this.concat != '0' && this.concat.length > 0 ) {
-        if (this.current === '0') {
+      if (this.printTotal) {
+        this.clearAll();
+        this.printTotal = false;
+        this.typeNumber(n);
+      } else {
+        if (this.current == '*' || this.current == '/' || this.current == '+' || this.current == '-') {
           this.current = num;
           this.concat += num;
           this.ceAllow = true;
+        } else if (this.concat != '0' && this.concat.length > 0 ) {
+          if (this.current === '0') {
+            this.current = num;
+            this.concat += num;
+            this.ceAllow = true;
+          } else {
+            this.current += num;
+            this.concat += num;
+            this.ceAllow = true;
+          }
         } else {
-          this.current += num;
-          this.concat += num;
+          this.current = num;
+          this.concat = num;
           this.ceAllow = true;
         }
-      } else {
-        this.current = num;
-        this.concat = num;
-        this.ceAllow = true;
       }
     },
     typePoint: function() {
-      if (this.pointAllow) {
-        if (this.current == '*' || this.current == '/' || this.current == '+' || this.current == '-') {
-          this.current = "0.";
-          this.concat += "0.";
-          this.ceAllow = true;
-          this.pointAllow = false;
-        } else {
-          this.current += ".";
-          this.concat += ".";
-          this.ceAllow = true;
-          this.pointAllow = false;
+      if (this.printTotal) {
+        this.clearAll();
+        this.printTotal = false;
+        this.typePoint();
+      } else {
+        if (this.pointAllow) {
+          if (this.current == '*' || this.current == '/' || this.current == '+' || this.current == '-') {
+            this.current = "0.";
+            this.concat += "0.";
+            this.ceAllow = true;
+            this.pointAllow = false;
+          } else {
+            this.current += ".";
+            this.concat += ".";
+            this.ceAllow = true;
+            this.pointAllow = false;
+          }
         }
       }
     },
     typeOperator: function(op) {
       var operator = op.toString();
-      if (this.concat.substr(-1) != '*' && this.concat.substr(-1) != '/' && this.concat.substr(-1) != '+' && this.concat.substr(-1) != '-') {
+      if (this.printTotal) {
         this.current = operator;
-        this.concat += operator;
+        this.concat = (Math.round(this.total * 1000)/1000).toString() + operator;
+        this.printTotal = false;
         this.ceAllow = true;
         this.pointAllow = true;
+      } else {
+        if (this.concat.substr(-1) != '*' && this.concat.substr(-1) != '/' && this.concat.substr(-1) != '+' && this.concat.substr(-1) != '-') {
+          this.current = operator;
+          this.concat += operator;
+          this.ceAllow = true;
+          this.pointAllow = true;
+        }
       }
     },
-    calculate: function() {
-      this.total = eval(this.concat);
-      this.current = (Math.round(this.total * 1000)/1000).toString();
-      this.concat += '=' + (Math.round(this.total * 1000)/1000).toString();
-      this.printTotal = true;
+    calculate: function() { //do not run if last digit not a number
+      if (!this.printTotal) {
+        this.total = eval(this.concat);
+        this.current = (Math.round(this.total * 1000)/1000).toString();
+        this.concat += '=' + (Math.round(this.total * 1000)/1000).toString();
+        this.printTotal = true;
+      }
     }
   }
 });
