@@ -14,7 +14,7 @@
         <p>JavaScript Calculator</p>
         <div id="calc-screen">
           <h1 id="calc-screen-current"> {{current}} </h1>
-          <h2 id="calc-screen-concat"> {{concat}} </h2>
+          <h3 id="calc-screen-concat"> {{concat}} </h3>
         </div>
         <div id="calc-buttons">
           <button class="red" id="AC" @click="clearAll">AC</button>
@@ -35,10 +35,10 @@
           <button @click="typeNumber(1)">1</button>
           <button @click="typeNumber(2)">2</button>
           <button @click="typeNumber(3)">3</button>
-          <button id="equal">=</button>
+          <button id="equal" @click="calculate">=</button>
 
           <button id="zero" @click="typeNumber(0)">0</button>
-          <button id="point">.</button>
+          <button id="point" @click="typePoint">.</button>
         </div>
       </div>
     </div>
