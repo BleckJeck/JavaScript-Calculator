@@ -1,0 +1,76 @@
+
+body {
+ margin: auto;
+ text-align: center;
+ font-family: 'Nova Mono', monospace;
+ background-color: #818181;
+}
+
+.container {
+  margin: 80px auto;
+  width: 300px;
+}
+
+#calc-case {
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #dcd7c8;
+  box-shadow: 3px 3px 10px 2px rgba(0,0,0,0.4),
+              inset 0px -3px 10px rgba(0,0,0,0.4);
+}
+
+#calc-case p {
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+#calc-screen {
+  border: 3px solid #464646;
+  background-color: #A8B6A2;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+#calc-screen h2, #calc-screen h1 {
+  margin: 2px 10px;
+}
+
+#calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 15px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  font-family: 'Nova Mono', monospace;
+  font-size: 18px;
+  color: #f2f2f2;
+  background-color: #464646;
+  box-shadow: 0 2px black,
+              inset 0px -1px 10px rgba(255,255,255,0.4);
+}
+
+button:focus {
+  outline: none;
+}
+
+button.red {
+  color: #f2f2f2;
+  background-color: #b32400;
+  box-shadow: 0 2px #661400,
+              inset 0px -1px 10px rgba(255,255,255,0.4);
+}
+
+button#zero {
+  grid-row: 5;
+  grid-column: 1/3
+}
+
+button#equal {
+  grid-row: 4/6;
+  grid-column: 4
+}
